@@ -60,7 +60,7 @@ $(document).ready(function() {
     var rounded = $('input.rounded:checked').val() == 'true',
         color = $('input.color').val(),
         speed = $('.speed').val();
-    if (parseInt(speed) != NaN) {
+    if (!isNaN(parseInt(speed))) {
       speed = parseInt(speed);
     }
     if (color.trim() == '') {
