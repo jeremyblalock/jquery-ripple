@@ -60,24 +60,28 @@ $(document).ready(function() {
     var rounded = $('input.rounded:checked').val() == 'true',
         color = $('input.color').val(),
         speed = $('.speed').val();
+    if (parseInt(speed) != NaN) {
+      speed = parseInt(speed);
+    }
     if (color.trim() == '') {
       color = 'red';
     }
     return {rounded: rounded, color: color, speed: speed};
   }
   $('.ripple').live('click', function(e) {
+    var params = getParams();
     e.stopPropagation();
-    $(this).ripple('fast');
+    $(this).ripple(params.speed, params.color, params.rounded);
     return false;
   })
   $('.add_box').click(function(e) {
-    var box = $('<div></div>').appendTo($('.boxes'));
-    box.ripple('fast');
+    var box = $('<div></div>').appendTo($('.boxes')),
+        params = getParams();
+    box.ripple(params.speed, params.color, params.rounded);
     return false;
   });
   $('input, select').change(function() {
     var params = getParams();
-    console.log(params);
     $(this).ripple(params.speed, params.color, params.rounded);
   });
 });
